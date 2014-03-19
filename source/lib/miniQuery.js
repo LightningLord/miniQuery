@@ -79,16 +79,24 @@ SweetSelector.Wrapper = function(recipient, source) {
 SweetSelector.DOM = {
   hide: function() {
           var i,
-            elementSet = this._gatherElementSet(selector);
+            elementSet = this;
+
+          if (arguments.length == 1) {
+            elementSet =  new SweetSelector.ElementSet(arguments[0]).elements();
+          }
 
           for (i = 0; i < elementSet.length; i++) {
             elementSet[i].style.display = "none";
           }
         },
 
-  show: function(selector) {
+  show: function() {
           var i,
-            elementSet = this._gatherElementSet(selector);
+            elementSet = this;
+
+          if (arguments.length == 1) {
+            elementSet =  new SweetSelector.ElementSet(arguments[0]).elements();
+          }
 
           for (i = 0; i < elementSet.length; i++) {
             elementSet[i].style.display = "inherit";
@@ -97,35 +105,35 @@ SweetSelector.DOM = {
 
   addClass: function(selector, className) {
               var i,
-                elementSet = this._gatherElementSet(selector);
+                elementSet = this;
+
+              if (arguments.length == 2) {
+                elementSet =  new SweetSelector.ElementSet(arguments[0]).elements();
+              }
 
               for (i = 0; i < elementSet.length; i++) {
                 elementSet[i].className =
                   elementSet[i].className + " " + className;
               }
+
+              return elementSet;
             },
 
   removeClass: function(selector, className) {
               var i,
-                elementSet = this._gatherElementSet(selector);
+                elementSet = this;
+
+              if (arguments.length == 2) {
+                elementSet =  new SweetSelector.ElementSet(arguments[0]).elements();
+              }
 
               for (i = 0; i < elementSet.length; i++) {
                 elementSet[i].className =
                   elementSet[i].className.replace(className, '').trim();
               }
-            },
 
-  _gatherElementSet: function(selector) {
-                       var elementsArray;
-
-                       if (selector[0] === ".") {
-                         elementsArray = Array.
-                           prototype.
-                           slice.
-                           call(document.getElementsByClassName("klass"), 0)
-                       } else if (selector[0] === "#") {
-                         elementsArray = Array(document.getElementById('eyed'));
-                       }
-                       return elementsArray;
-                     }
+              return elementSet;
+            }
 }
+
+SweetSelector.init();
