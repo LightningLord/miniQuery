@@ -67,6 +67,15 @@ SweetSelector.ElementSet.prototype = {
   },
 };
 
+SweetSelector.Wrapper = function(recipient, source) {
+  for (var key in source) {
+    if(source.hasOwnProperty(key)){
+      recipient[key] = source[key];
+    }
+  }
+  return recipient;
+}
+
 SweetSelector.DOM = {
   hide: function() {
           var i,
