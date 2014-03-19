@@ -137,3 +137,34 @@ SweetSelector.DOM = {
 }
 
 SweetSelector.init();
+
+/* ---- */
+
+EventDispatcher = {
+  on: function() {
+        var i,
+          elementSet = this;
+
+        if (arguments.length == 3) {
+          elementSet =  new SweetSelector.ElementSet(arguments[0]).elements();
+        }
+
+        for (i = 0; i < elementSet.length; i++) {
+          elementSet[i].addEventListener(arguments[1], arguments[2]);
+        }
+      },
+
+  trigger: function() {
+        var i,
+          elementSet = this;
+
+        if (arguments.length == 2) {
+          elementSet =  new SweetSelector.ElementSet(arguments[0]).elements();
+        }
+
+        for (i = 0; i < elementSet.length; i++) {
+          elementSet[i].dispatchEvent(new Event(arguments[1]));
+        }
+      },
+
+};
