@@ -49,6 +49,24 @@ SweetSelector.init = function() {
   SweetSelector.Wrapper(SweetSelector, SweetSelector.DOM);
 };
 
+SweetSelector.ElementSet = function(selector) {
+  this.selector = selector;
+};
+
+SweetSelector.ElementSet.prototype = {
+  strategies: [SelectorStrategy.ClassSelector, SelectorStrategy.IdSelector, SelectorStrategy.TagsSelector],
+
+  elements: function() {
+    var strategy, set,
+    len = this.strategies.length;
+
+    for (var i = 0; i < len; i++) {
+      strategy = this.strategies[i];
+      if (strategy.applies(this.selector)) return strategy.set();
+    }
+  },
+};
+
 SweetSelector.DOM = {
   hide: function() {
           var i,
