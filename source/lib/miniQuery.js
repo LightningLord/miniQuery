@@ -59,7 +59,7 @@ SelectorStrategy.TagsSelector = {
 }
 
 function SweetSelector(selector) {
-  if (arguments.length == 1) {
+  if (!!selector) {
      return SweetSelector.Wrapper(new SweetSelector.ElementSet(selector).elements(), SweetSelector.DOM);
   }
 };
