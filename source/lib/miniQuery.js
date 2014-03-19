@@ -45,10 +45,18 @@ function SweetSelector(selector) {
   }
 };
 
-SweetSelector.init = function() {
-  SweetSelector.Wrapper(SweetSelector, SweetSelector.DOM);
-  SweetSelector.Wrapper(SweetSelector, SweetSelector.EventDispatcher);
-  SweetSelector.Wrapper(SweetSelector, SweetSelector.AjaxWrapper);
+SweetSelector.addMixins = function(mixins) {
+  SweetSelector.MIXINS = [];
+
+  var i,
+      len = mixins.length;
+
+  for (i = 0; i < len; i ++) {
+    SweetSelector.MIXINS.push(mixins[i])
+    SweetSelector.Wrapper(SweetSelector, mixins[i]);
+  }
+
+  return SweetSelector;
 };
 
 SweetSelector.ElementSet = function(selector) {
@@ -179,12 +187,10 @@ SweetSelector.AjaxWrapper = {
            }
 };
 
-SweetSelector.init();
-
-$ = SweetSelector;
-
 /* Basic Demo */
 document.addEventListener("DOMContentLoaded", function(event) {
+  $ = SweetSelector.addMixins([ SweetSelector.DOM, SweetSelector.EventDispatcher, SweetSelector.AjaxWrapper ]);
+
   $.on('.klass', 'click', function(e){
     console.log("Private eyed, they're watchin' you, they see your every move.");
     $("#eyed").hide();
