@@ -192,3 +192,13 @@ SweetSelector.AjaxWrapper = {
 SweetSelector.init();
 
 $ = SweetSelector;
+
+/* Basic Demo */
+document.addEventListener("DOMContentLoaded", function(event) {
+  $.on('.klass', 'click', function(e){
+    console.log("Private eyed, they're watchin' you, they see your every move.");
+    $("#eyed").hide();
+  });
+
+});
+
