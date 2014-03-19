@@ -45,16 +45,6 @@ function SweetSelector(selector) {
   }
 };
 
-SweetSelector.prototype = {
-  on: function() {
-        this.EventDispatcher.on(arguments);
-      },
-
-  trigger: function() {
-             this.EventDispatcher.trigger(arguments);
-           }
-}
-
 SweetSelector.init = function() {
   SweetSelector.Wrapper(SweetSelector, SweetSelector.DOM);
   SweetSelector.Wrapper(SweetSelector, SweetSelector.EventDispatcher);
