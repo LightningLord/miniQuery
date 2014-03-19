@@ -4,6 +4,25 @@
 
 var SelectorStrategy = {};
 
+/* Steven Sez:
+ *
+ * I'm introducing a SelectorStrategy namespace in which I will
+ * create a number of strategies.  You'll see this come into play in
+ * SweetSelector.ElementSet.elements
+ *
+ * this is a refactoring technique, not really *best* used here called "Replace
+ * conditional with polymorphism"
+ *
+ * Also note:  many of you were contending with whether the get*by* command was
+ * returning a singular or a plural.  By casting all of the results into a
+ * hash, I don't have to worry about null, 1 or many, i can always treat the
+ * results like a many and iterate across them.  Check out
+ * SweetSelector.DOM.hide() for an implementation of the benefits of this.
+ *
+ * By there always being an array I don't have to do conditional logic. :)
+ *
+ */
+
 SelectorStrategy.ClassSelector = {
   applies: function(selector) {
              this.selector = selector;
@@ -59,6 +78,10 @@ SweetSelector.addMixins = function(mixins) {
   return SweetSelector;
 };
 
+/* When we find an element set I want that element set to be able to respond to
+ * the SweetSelector methods too.
+ */
+
 SweetSelector.ElementSet = function(selector) {
   this.selector = selector;
 };
@@ -77,6 +100,8 @@ SweetSelector.ElementSet.prototype = {
   },
 };
 
+/* How do to a mix-in in Javascript.  jQuery calls this extend() */
+
 SweetSelector.Wrapper = function(recipient, source) {
   for (var key in source) {
     if(source.hasOwnProperty(key)){
@@ -86,6 +111,7 @@ SweetSelector.Wrapper = function(recipient, source) {
   return recipient;
 }
 
+/* Mixins... */
 SweetSelector.DOM = {
   hide: function() {
           var i,
