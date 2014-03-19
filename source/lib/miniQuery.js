@@ -168,3 +168,16 @@ EventDispatcher = {
       },
 
 };
+
+/* Ajax module */
+AjaxWrapper = {
+  request: function(opts) {
+             var oReq = new XMLHttpRequest();
+
+             oReq.addEventListener("load", opts.success);
+             oReq.addEventListener("error", opts.fail);
+
+             oReq.open(opts.type, opts.url);
+             oReq.send();
+           }
+};
