@@ -45,8 +45,20 @@ function SweetSelector(selector) {
   }
 };
 
+SweetSelector.prototype = {
+  on: function() {
+        this.EventDispatcher.on(arguments);
+      },
+
+  trigger: function() {
+             this.EventDispatcher.trigger(arguments);
+           }
+}
+
 SweetSelector.init = function() {
   SweetSelector.Wrapper(SweetSelector, SweetSelector.DOM);
+  SweetSelector.Wrapper(SweetSelector, SweetSelector.EventDispatcher);
+  SweetSelector.Wrapper(SweetSelector, SweetSelector.AjaxWrapper);
 };
 
 SweetSelector.ElementSet = function(selector) {
@@ -136,11 +148,7 @@ SweetSelector.DOM = {
             }
 }
 
-SweetSelector.init();
-
-/* ---- */
-
-EventDispatcher = {
+SweetSelector.EventDispatcher = {
   on: function() {
         var i,
           elementSet = this;
@@ -169,8 +177,7 @@ EventDispatcher = {
 
 };
 
-/* Ajax module */
-AjaxWrapper = {
+SweetSelector.AjaxWrapper = {
   request: function(opts) {
              var oReq = new XMLHttpRequest();
 
@@ -181,3 +188,7 @@ AjaxWrapper = {
              oReq.send();
            }
 };
+
+SweetSelector.init();
+
+$ = SweetSelector;
