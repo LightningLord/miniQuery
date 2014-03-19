@@ -39,6 +39,16 @@ SelectorStrategy.TagsSelector = {
        }
 }
 
+function SweetSelector(selector) {
+  if (arguments.length == 1) {
+     return SweetSelector.Wrapper(new SweetSelector.ElementSet(selector).elements(), SweetSelector.DOM);
+  }
+};
+
+SweetSelector.init = function() {
+  SweetSelector.Wrapper(SweetSelector, SweetSelector.DOM);
+};
+
 SweetSelector.DOM = {
   hide: function() {
           var i,
