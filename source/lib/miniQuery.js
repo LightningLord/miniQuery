@@ -1,8 +1,46 @@
 /*!
  * minQuery
  */
-var DOM = {
-  hide: function(selector) {
+
+var SelectorStrategy = {};
+
+SelectorStrategy.ClassSelector = {
+  applies: function(selector) {
+             this.selector = selector;
+             return this.selector[0] === ".";
+           },
+
+  set: function() {
+         nodeList =  document.getElementsByClassName(this.selector.slice(1));
+         return Array.prototype.slice.call(nodeList, 0);
+       }
+};
+
+SelectorStrategy.IdSelector = {
+  applies: function(selector) {
+             this.selector = selector;
+             return this.selector[0] === "#";
+           },
+
+  set: function() {
+         node =  document.getElementById(this.selector.slice(1));
+         return Array(node);
+       }
+};
+
+SelectorStrategy.TagsSelector = {
+  applies: function(selector) {
+             this.selector = selector;
+             return true;
+           },
+  set: function() {
+         nodeList =  document.getElementsByTagName(this.selector);
+         return Array.prototype.slice.call(nodeList, 0);
+       }
+}
+
+SweetSelector.DOM = {
+  hide: function() {
           var i,
             elementSet = this._gatherElementSet(selector);
 
