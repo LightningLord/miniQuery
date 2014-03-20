@@ -193,15 +193,18 @@ SweetSelector.DOM = {
 
   addClass: function(selector, className) {
               var i,
-                elementSet = this;
+                elementSet = this,
+                args = Array.prototype.slice.call(arguments, 0);
 
-              if (arguments.length == 2) {
-                elementSet =  new SweetSelector.ElementSet(arguments[0]).elements();
+              if (args.length == 2) {
+                elementSet =  new SweetSelector.ElementSet(args.shift()).elements();
               }
 
               for (i = 0; i < elementSet.length; i++) {
-                elementSet[i].className =
-                  elementSet[i].className + " " + className;
+                if (!elementSet[i].className.match(args[0])) {
+                  elementSet[i].className =
+                    elementSet[i].className + " " + args[0];
+                }
               }
 
               return elementSet;
