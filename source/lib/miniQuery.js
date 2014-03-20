@@ -43,7 +43,7 @@ SelectorStrategy.IdSelector = {
 
   set: function() {
          node =  document.getElementById(this.selector.slice(1));
-         return Array(node);
+         return !!node ? Array(node) : [];
        }
 };
 
