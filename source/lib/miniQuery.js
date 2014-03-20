@@ -99,7 +99,7 @@ SelectorStrategy.TagsWithSpecifiers = {
 
 function SweetSelector(selector) {
   if (!!selector) {
-     return SweetSelector.Wrapper(new SweetSelector.ElementSet(selector).elements(), SweetSelector.DOM);
+     return SweetSelector.Wrapper(new SweetSelector.ElementSet(selector).elements(), SweetSelector.DOM, SweetSelector.EventDispatcher);
   }
 };
 
