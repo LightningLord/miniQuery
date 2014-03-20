@@ -142,12 +142,20 @@ SweetSelector.ElementSet.prototype = {
 
 /* How do to a mix-in in Javascript.  jQuery calls this extend() */
 
-SweetSelector.Wrapper = function(recipient, source) {
-  for (var key in source) {
-    if(source.hasOwnProperty(key)){
-      recipient[key] = source[key];
+SweetSelector.Wrapper = function(recipient) {
+  var i, source,
+    args = Array.prototype.slice.call(arguments, 0),
+    len = args.length;
+
+  for (i = 1; i < len; i++) {
+    source = arguments[i];
+    for (var key in source) {
+      if(source.hasOwnProperty(key)){
+        recipient[key] = source[key];
+      }
     }
   }
+
   return recipient;
 }
 
