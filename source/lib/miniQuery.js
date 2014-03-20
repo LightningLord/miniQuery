@@ -8,14 +8,14 @@ var SelectorStrategy = {};
  *
  * I'm introducing a SelectorStrategy namespace in which I will
  * create a number of strategies.  You'll see this come into play in
- * SweetSelector.ElementSet.elements
+ * `SweetSelector.ElementSet.elements`
  *
- * this is a refactoring technique, not really *best* used here called "Replace
- * conditional with polymorphism"
+ * This is a refactoring technique, not really *best* used here called "Replace
+ * conditional with polymorphism."
  *
  * Also note:  many of you were contending with whether the get*by* command was
- * returning a singular or a plural.  By casting all of the results into a
- * hash, I don't have to worry about null, 1 or many, i can always treat the
+ * returning a singular or a plural.  By casting all of the results into an
+ * array, I don't have to worry about null, 1 or many, i can always treat the
  * results like a many and iterate across them.  Check out
  * SweetSelector.DOM.hide() for an implementation of the benefits of this.
  *
