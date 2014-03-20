@@ -227,27 +227,29 @@ SweetSelector.DOM = {
 SweetSelector.EventDispatcher = {
   on: function() {
         var i,
+          args = Array.prototype.slice.call(arguments, 0),
           elementSet = this;
 
-        if (arguments.length == 3) {
-          elementSet =  new SweetSelector.ElementSet(arguments[0]).elements();
+        if (args.length == 3) {
+          elementSet =  new SweetSelector.ElementSet(args.shift()).elements();
         }
 
         for (i = 0; i < elementSet.length; i++) {
-          elementSet[i].addEventListener(arguments[1], arguments[2]);
+          elementSet[i].addEventListener(args[0], args[1]);
         }
       },
 
   trigger: function() {
         var i,
+          args = Array.prototype.slice.call(arguments, 0),
           elementSet = this;
 
-        if (arguments.length == 2) {
-          elementSet =  new SweetSelector.ElementSet(arguments[0]).elements();
+        if (args.length == 2) {
+          elementSet =  new SweetSelector.ElementSet(args.shift()).elements();
         }
 
         for (i = 0; i < elementSet.length; i++) {
-          elementSet[i].dispatchEvent(new Event(arguments[1]));
+          elementSet[i].dispatchEvent(new Event(args[0]));
         }
       },
 
