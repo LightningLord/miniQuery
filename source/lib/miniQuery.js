@@ -212,15 +212,19 @@ SweetSelector.DOM = {
 
   removeClass: function(selector, className) {
               var i,
-                elementSet = this;
+                elementSet = this,
+                args = Array.prototype.slice.call(arguments, 0);
 
               if (arguments.length == 2) {
-                elementSet =  new SweetSelector.ElementSet(arguments[0]).elements();
+                elementSet =  new SweetSelector.ElementSet(args.shift()).elements();
               }
 
               for (i = 0; i < elementSet.length; i++) {
                 elementSet[i].className =
-                  elementSet[i].className.replace(className, '').trim();
+                  elementSet[i].className
+                  .replace(new RegExp(args[0], 'g'), '')
+                  .replace(new RegExp(/\s+/), ' ')
+                  .trim();
               }
 
               return elementSet;
