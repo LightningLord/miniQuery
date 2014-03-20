@@ -124,6 +124,8 @@ SweetSelector.DOM = {
           for (i = 0; i < elementSet.length; i++) {
             elementSet[i].style.display = "none";
           }
+
+          return elementSet;
         },
 
   show: function() {
@@ -137,6 +139,8 @@ SweetSelector.DOM = {
           for (i = 0; i < elementSet.length; i++) {
             elementSet[i].style.display = "inherit";
           }
+
+          return elementSet;
         },
 
   addClass: function(selector, className) {
