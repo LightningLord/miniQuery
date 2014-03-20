@@ -58,6 +58,45 @@ SelectorStrategy.TagsSelector = {
        }
 }
 
+SelectorStrategy.TagsWithSpecifiers = {
+  applies: function(selector) {
+             this.selector = selector;
+             return selector.match(/^[a-z]+[\.\#]/);
+           },
+
+  _extractTagAndSpecifierStrings: function() {
+                 var sel = this.selector,
+                   tagResults = sel.match(/^([a-z]+)([\.\#](.*))/),
+                   tagString = tagResults[1],
+                   specifiersStrings = tagResults[2].split(/([\.\#]+[a-zA-Z0-9]+)/g).filter(function(el) {
+                       return !!el
+                     });
+                 return {"tagString": tagString, "specifierStrings": specifiersStrings};
+               },
+
+  set: function() {
+         var i,j, specificationName,
+          applicable = undefined,
+          res = [],
+          specification = this._extractTagAndSpecifierStrings(this._extractTagAndSpecifierStrings()),
+          slice = Array.prototype.slice;
+
+         nodeList = slice.call(document.getElementsByTagName(specification.tagString), 0);
+         for (i = 0; i < nodeList.length; i++) {
+           for (j = 0; j < specification.specifierStrings.length; j++) {
+             specificationName = specification.specifierStrings[j].substring(1);
+             if (
+                 (nodeList[i].id == specificationName) ||
+                 (nodeList[i].className.match(new RegExp(specificationName)))
+                 ) {
+               res.push(nodeList[i]);
+             }
+           }
+         }
+         return res;
+       }
+}
+
 function SweetSelector(selector) {
   if (!!selector) {
      return SweetSelector.Wrapper(new SweetSelector.ElementSet(selector).elements(), SweetSelector.DOM);
@@ -87,7 +126,8 @@ SweetSelector.ElementSet = function(selector) {
 };
 
 SweetSelector.ElementSet.prototype = {
-  strategies: [SelectorStrategy.ClassSelector, SelectorStrategy.IdSelector, SelectorStrategy.TagsSelector],
+  strategies: [SelectorStrategy.ClassSelector, SelectorStrategy.IdSelector, SelectorStrategy.TagsWithSpecifiers,
+    SelectorStrategy.TagsSelector],
 
   elements: function() {
     var strategy, set,
