@@ -266,8 +266,16 @@ SweetSelector.AjaxWrapper = {
   request: function(opts) {
              var oReq = new XMLHttpRequest();
 
-             oReq.addEventListener("load", opts.success);
-             oReq.addEventListener("error", opts.fail);
+             oReq.onreadystatechange = function(response) {
+               if (this.readyState == this.DONE) {
+                 if (this.status.toString().match(/2\d\d/)) {
+                   opts.success(oReq, response);
+                 }
+                 if (parseInt(this.status) >= 300) {
+                   opts.fail(oReq, response);
+                 }
+               }
+             };
 
              oReq.open(opts.type, opts.url);
              oReq.send();
