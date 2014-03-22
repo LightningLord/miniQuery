@@ -74,7 +74,31 @@ describe("MiniQuery module", function() {
     });
 
     describe("can make an AJAX request", function() {
-      xit("successful query triggers success() callback", function() {
+      beforeEach(function() {
+        jasmine.Ajax.install();
+      });
+
+      afterEach(function() {
+        jasmine.Ajax.uninstall();
+      });
+
+      it("successful query triggers success() callback", function() {
+        var doneFn = jasmine.createSpy("success");
+
+        jasmine.Ajax.stubRequest('/some/cool/url').andReturn({
+          "responseText": 'immediate response'
+        });
+
+        $.request({
+          url: '/some/cool/url',
+          type: 'GET',
+          success: function() {
+            doneFn(this.responseText);
+          }
+        });
+
+        expect(jasmine.Ajax.requests.mostRecent().url).toBe('/some/cool/url');
+        expect(doneFn).toHaveBeenCalled();
       });
     });
 
