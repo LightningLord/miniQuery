@@ -273,6 +273,7 @@ SweetSelector.AjaxWrapper = {
              oReq.send();
            }
 };
+SweetSelector.AjaxWrapper.ajax = SweetSelector.AjaxWrapper.request;
 
 /* Basic Demo */
 document.addEventListener("DOMContentLoaded", function(event) {
