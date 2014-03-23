@@ -64,21 +64,10 @@ SelectorStrategy.TagsWithSpecifiers = {
              return selector.match(/^[a-z]+[\.\#]/);
            },
 
-  _extractTagAndSpecifierStrings: function() {
-                 var sel = this.selector,
-                   tagResults = sel.match(/^([a-z]+)([\.\#](.*))/),
-                   tagString = tagResults[1],
-                   specifiersStrings = tagResults[2].split(/([\.\#]+[a-zA-Z0-9]+)/g).filter(function(el) {
-                       return !!el
-                     });
-                 return {"tagString": tagString, "specifierStrings": specifiersStrings};
-               },
-
   set: function() {
-         var i,j, specificationName,
-          applicable = undefined,
+         var i,j, specificationName, nodeList,
           res = [],
-          specification = this._extractTagAndSpecifierStrings(this._extractTagAndSpecifierStrings()),
+          specification = new SelectorStrategy.StringDeriver(this.selector).derive(),
           slice = Array.prototype.slice;
 
          nodeList = slice.call(document.getElementsByTagName(specification.tagString), 0);
@@ -96,6 +85,33 @@ SelectorStrategy.TagsWithSpecifiers = {
          return res;
        }
 }
+
+SelectorStrategy.StringDeriver = function(baseString) {
+                 this.baseString = baseString;
+               };
+
+SelectorStrategy.StringDeriver.prototype = {
+  derive: function() {
+               return {
+                 tagString: this.tagString(),
+                 specifierStrings: this.specifiers()
+               };
+             },
+
+  tagResults: function() {
+                return this.baseString.match(/^([a-z]+)([\.\#](.*))/);
+              },
+
+  tagString: function() {
+               return this.tagResults()[1];
+             },
+
+  specifiers: function() {
+                return this.tagResults()[2].split(/([\.\#]+[a-zA-Z0-9]+)/g).filter(function(el) {
+                  return !!el;
+                });
+              }
+};
 
 function SweetSelector(selector) {
   if (!!selector) {

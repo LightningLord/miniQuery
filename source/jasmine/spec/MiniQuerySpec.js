@@ -132,4 +132,19 @@ describe("SelectorStrategy.TagsWithSpecifiers strategy", function() {
     });
   });
 });
+
+describe("SelectorStrategy.StringDeriver utility class", function() {
+  describe("when asked to extract from div#larry.foo.bar", function() {
+    beforeEach(function() {
+      this.instance = new SelectorStrategy.StringDeriver("div#larry.foo.bar").derive();
+    });
+
+    it("knows the tag to be 'div'", function() {
+      expect(this.instance.tagString).toEqual("div");
+    });
+
+    it("knows the specifiers to be #larry, .foo, and .bar", function() {
+      expect(this.instance.specifierStrings.sort()).toEqual([ '#larry', '.bar', '.foo' ]);
+    });
+  });
 });
