@@ -101,5 +101,35 @@ describe("MiniQuery module", function() {
         expect(doneFn).toHaveBeenCalled();
       });
     });
+});
 
+describe("SelectorStrategy.TagsWithSpecifiers strategy", function() {
+  describe("when asked about applicability", function() {
+    it("is applicable to a tag and class selector specification", function() {
+      expect(SelectorStrategy.TagsWithSpecifiers.applies("div.class")).toBeTruthy();
+    });
+
+    it("is applicable to a tag and id selector specification", function() {
+      expect(SelectorStrategy.TagsWithSpecifiers.applies("div#someId")).toBeTruthy();
+    });
+
+    it("is not applicable to a tag and id selector specification", function() {
+      expect(SelectorStrategy.TagsWithSpecifiers.applies(".klass")).not.toBeTruthy();
+    });
+
+    it("is not applicable to a tag and id selector specification", function() {
+      expect(SelectorStrategy.TagsWithSpecifiers.applies("p")).not.toBeTruthy();
+    });
+  });
+
+  describe("extracts the tag and the specifiers", function() {
+    beforeEach(function() {
+      SelectorStrategy.TagsWithSpecifiers.selector = "div.klass";
+    });
+
+    it("locates an HTMLNodel based on class", function() {
+      expect(SelectorStrategy.TagsWithSpecifiers.set()[0].className).toEqual("klass");
+    });
+  });
+});
 });
