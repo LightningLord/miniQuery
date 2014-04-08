@@ -95,16 +95,10 @@ var AjaxWrapper = function(){}
 
 AjaxWrapper.prototype = {
   request: function(inputData){
-    var url = inputData.url
-    var type = inputData.type
-    var success = inputData.success
-    var fail = inputData.fail
-
     var req = new XMLHttpRequest()
-    req.open(type, url, true)
-    req.onload = success
-    req.onerror = fail
-
+    req.open(inputData.type, inputData.url, true)
+    req.onload = inputData.success
+    req.onerror = inputData.fail
     req.send()
   }
 }
