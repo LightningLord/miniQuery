@@ -21,5 +21,26 @@ DOM.hide = function(el){
 
 DOM.show = function(el){
   SweetSelector.select(el)[0].style.display = ''
-  // el.style.display = '';
 }
+
+// // div.klass should look like this: <div class="klass shadi">klass</div>
+// DOM.addClass('.klass', 'shadi')
+// // div.klass should look like this: <div class="klass">klass</div>
+// DOM.removeClass('.klass', 'shadi')
+
+DOM.addClass = function(el, className){
+  element = SweetSelector.select(el)[0]
+  if (element.classList)
+    element.classList.add(className);
+  else
+    element.className += ' ' + className;
+}
+
+DOM.removeClass = function(el, className){
+  element = SweetSelector.select(el)[0]
+  if (element.classList)
+    element.classList.remove(className);
+  else
+    element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+}
+
