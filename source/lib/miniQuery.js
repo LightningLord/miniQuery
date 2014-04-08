@@ -1,6 +1,6 @@
 /*!
- * minQuery
- */
+* minQuery
+*/
 // SweetSelector.select('#eyed')
 // should return <div id="eyed">eyed</div>
 
@@ -44,3 +44,18 @@ DOM.removeClass = function(el, className){
     element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
 }
 
+    // EventDispatcher.on('.klass', 'shadi', function() { console.log("awesome") });
+    // // this should print "awesome" in the console.
+    // EventDispatcher.trigger('.klass', 'shadi');
+
+EventDispatcher = {}
+EventDispatcher.on = function(el, eventName, eventHandler){
+  event = new Event(eventName)
+  element = SweetSelector.select(el)[0]
+  element.addEventListener(eventName, eventHandler);
+}
+
+EventDispatcher.trigger = function(el, eventName){
+  element = SweetSelector.select(el)[0]
+  element.dispatchEvent(event)
+}
