@@ -90,3 +90,23 @@ EventDispatcher.prototype = {
 }
 
 var unicornDispatcher = new EventDispatcher
+
+var AjaxWrapper = function(){}
+
+AjaxWrapper.prototype = {
+  request: function(inputData){
+    var url = inputData.url
+    var type = inputData.type
+    var success = inputData.success
+    var fail = inputData.fail
+
+    var req = new XMLHttpRequest()
+    req.open(type, url, true)
+    req.onload = success
+    req.onerror = fail
+
+    req.send()
+  }
+}
+
+var wrapper = new AjaxWrapper
