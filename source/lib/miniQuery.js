@@ -55,10 +55,15 @@ var DOM = function(){
 
 DOM.prototype = {
   hide: function(string){
-    console.log("we are in hide this is the string: " + string);
     var selector = new SweetSelector();
     var element = selector.select(string);
     element.style.display = 'none';
+  },
+
+  show: function(string){
+    var selector = new SweetSelector();
+    var element = selector.select(string);
+    element.style.display = '';
   }
 };
   
@@ -71,6 +76,7 @@ window.onload = function(){
   console.log(selector.select("a"));
   var dommer = new DOM();
   dommer.hide(".klass");
+  dommer.show(".klass");
 
 };
 
