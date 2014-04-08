@@ -19,8 +19,14 @@ SweetSelector.prototype = {
     firstCharacter = string[0];
     if (firstCharacter === "."){
       result = self.selectByClass(self.parseString(string));
-    } elseif (firstCharacter === "#"){
+    }
+    else if (firstCharacter === "#"){
       result = self.selectById(self.parseString(string));
+      // debugger
+    }
+    else
+    {
+      result = self.selectByTag(string);
     }
     return result;
   },
@@ -31,7 +37,12 @@ SweetSelector.prototype = {
   },
 
   selectById: function(element){
-    returnElement = document.getElementById(element)[0];
+    returnElement = document.getElementById(element);
+    return returnElement;
+  },
+
+  selectByTag: function(element){
+    returnElement = document.getElementsByTagName(element)[0];
     return returnElement;
   }
 
@@ -40,6 +51,10 @@ SweetSelector.prototype = {
 window.onload = function(){
   var selector = new SweetSelector();
   selector.select(".klass");
+  selector.select("#eyed");
+  console.log(selector.select(".klass"));
+  console.log(selector.select("#eyed"));
+  console.log(selector.select("a"));
 };
 
   
