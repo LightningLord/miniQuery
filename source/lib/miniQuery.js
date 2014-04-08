@@ -104,22 +104,28 @@ Wrapper.prototype = {
 // DOM manipulation
   hide: function() {
     DOM.hide(this.input)
+    return this
   },
   show: function() {
     DOM.show(this.input)
+    return this
   },
   addClass: function(newClass){
     DOM.addClass(this.input, newClass)
+    return this
   },
   removeClass: function(badClass){
     DOM.removeClass(this.input, badClass)
+    return this
   },
   // Event Dispatch
   on: function(eventName, callback) {
     EventDispatcher.on(this.input, eventName, callback)
+    return this
   },
   trigger: function(eventName) {
     EventDispatcher.trigger(this.input, eventName)
+    return this
   }
 }
 
