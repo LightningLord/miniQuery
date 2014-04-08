@@ -34,10 +34,10 @@ var SweetSelector = (function(){
     select: function(element) {
       // So if it starts with #, . , or tag different rules
       if (element.charAt(0) == "#"){
-        return document.getElementById(element);
+        return document.getElementById(element.substring(1));
       }
       else if (element.charAt(0) == ".") {
-        return document.getElementsByClassName(element);
+        return document.getElementsByClassName(element.substring(1));
       }
       else {
         return document.getElementsByTagName(element);
