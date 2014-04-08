@@ -81,18 +81,18 @@ var DOM = (function(){
   }
 }())
 
-DOM.show = function(element){
-  if (element.charAt(0) == "#"){
-    return document.getElementById(element.substring(1)).style.display = "";
-  }
-  else if (element.charAt(0) == "."){
-    var className = element.substring(1)
-    return document.getElementsByClassName(className)[0].style.display = ""
-  }
-  else {
-    return document.getElementsByTagName(element)[0].style.display = "";
-  }
-}
+// DOM.show = function(element){
+//   if (element.charAt(0) == "#"){
+//     return document.getElementById(element.substring(1)).style.display = "";
+//   }
+//   else if (element.charAt(0) == "."){
+//     var className = element.substring(1)
+//     return document.getElementsByClassName(className)[0].style.display = ""
+//   }
+//   else {
+//     return document.getElementsByTagName(element)[0].style.display = "";
+//   }
+// }
 
 // DOM.hide('.klass')
 // DOM.hide('#eyed')
