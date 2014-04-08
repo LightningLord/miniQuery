@@ -101,8 +101,8 @@ var Wrapper = function(input){
   this.domCollection = SweetSelector.select(input)
   this.input = input
 }
-
 Wrapper.prototype = {
+// DOM manipulation
   hide: function() {
     DOM.hide(this.input)
   },
@@ -114,7 +114,17 @@ Wrapper.prototype = {
   },
   removeClass: function(badClass){
     DOM.removeClass(this.input, badClass)
+  },
+  // Event Dispatch
+  on: function(eventName, callback) {
+    EventDispatcher.on(this.input, eventName, callback)
+  },
+  trigger: function(eventName) {
+    EventDispatcher.trigger(this.input, eventName)
   }
+  // AJAX
+
+
 }
 
 var miniQuery = function(selector){
