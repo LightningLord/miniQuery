@@ -86,3 +86,22 @@ DOM.show = function(element){
 // DOM.hide('#eyed')
 // DOM.hide('a') // hides the div
 // DOM.show('.klass') // shows the div
+
+var EventDispatcher = (function(){
+  return {
+    on: function(element, eventName, fn) {
+      eventName = new CustomEvent(fn)
+      elem = document.querySelectorAll(element)
+      elem.addEventListener(eventName, fn)
+    }
+  }
+}())
+
+EventDispatcher.trigger = function(element, eventName){
+  elem = document.querySelectorAll(element)
+  elem.dispatchEvent(eventName)
+}
+
+// EventDispatcher.on('.klass', 'shadi', function() { console.log("awesome") });
+// EventDispatcher.trigger('.klass', 'shadi');
+// this should print "awesome" in the console.
