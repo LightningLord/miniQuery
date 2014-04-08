@@ -16,39 +16,35 @@
       return document.getElementsByTagName(selector)
     }
   }
-
-
 }
 
 
 
 var sweetSelector = new SweetSelector
 
-
 var DOM = function(){
 
 }
 
 DOM.prototype = {
-  hide: function(selector){
-    var domCollection = sweetSelector.select(selector)
+  domCollection: function(selector){
+    return sweetSelector.select(selector)
+  },
+
+  changeDisplay: function(cssAttribute, domCollection){
     if (domCollection.length) {
       for (var i = 0; i < domCollection.length; i++){
-        domCollection[i].style.display = 'none'
+        domCollection[i].style.display = cssAttribute
       }
     } else {
-      domCollection.style.display = 'none'
+      domCollection.style.display = cssAttribute
     }
   },
+  hide: function(selector){
+    this.changeDisplay('none', this.domCollection(selector))
+  },
   show: function(selector){
-    var domCollection = sweetSelector.select(selector)
-    if (domCollection.length) {
-      for (var i = 0; i < domCollection.length; i++){
-        domCollection[i].style.display = 'block'
-      }
-    } else {
-      domCollection.style.display = 'block'
-    }
+    this.changeDisplay('block', this.domCollection(selector))
   }
 }
 
