@@ -43,12 +43,33 @@ var SweetSelector = (function(){
         return document.getElementsByTagName(element);
       }
     }
-
-
   };
-
 }())
 
 SweetSelector.select("#eyed");
 SweetSelector.select(".klass");
 SweetSelector.select("a");
+
+var DOM = (function(){
+  // function displayNone(element) {
+  //   document.getElementsByClassName(element)[0].style.display = "none";
+  return {
+    hide: function(element) {
+      if (element.charAt(0) == "#"){
+        return document.getElementById(element.substring(1)).style.display = "none";
+      }
+      else if (element.charAt(0) == "."){
+        var className = element.substring(1)
+        return document.getElementsByClassName(className)[0].style.display = 'none'
+      }
+      else {
+        return document.getElementsByTagName(element)[0].style.display = "none";
+      }
+    }
+  }
+}())
+
+// DOM.hide('.klass')
+// DOM.hide('#eyed')
+// DOM.hide('a') // hides the div
+// DOM.show('.klass') // shows the div
