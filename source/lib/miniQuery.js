@@ -80,14 +80,3 @@ var AjaxWrapper = (function(){
     }
   }
 })();
-
-// {
-//  url: 'someurl',
-//  type: 'GET',
-//  success: function() {
-//    //do something
-//  },
-//  fail: function() {
-//   //do something
-//  }
-// }
