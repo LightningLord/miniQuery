@@ -40,11 +40,23 @@ DOM.prototype = {
       domCollection.style.display = cssAttribute
     }
   },
+
   hide: function(selector){
     this.changeDisplay('none', this.domCollection(selector))
   },
+
   show: function(selector){
     this.changeDisplay('block', this.domCollection(selector))
+  },
+
+  addClass: function(selector, newClass){
+    var domCollection = this.domCollection(selector)
+    domCollection.classList.add(newClass)
+  },
+
+  removeClass: function(selector, badClass){
+    var domCollection = this.domCollection(selector)
+    domCollection.classList.remove(badClass)
   }
 }
 
