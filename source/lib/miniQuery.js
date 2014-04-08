@@ -59,3 +59,22 @@ DOM.prototype = {
 }
 
 var dom = new DOM
+
+var EventDispatcher = function(){
+
+}
+
+EventDispatcher.prototype = {
+  on: function(selector, event, callback){
+    var domCollection = sweetSelector.select(selector)
+    if (domCollection.length) {
+      for (var i=0; i< domCollection.length; i++) {
+        domCollection[i].addEventListener(event, callback)
+      }
+    } else {
+      domCollection.addEventListener(event, callback)
+    }
+  }
+}
+
+var unicornDispatcher = new EventDispatcher
