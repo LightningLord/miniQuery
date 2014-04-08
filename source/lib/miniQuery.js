@@ -65,6 +65,18 @@ var DOM = (function(){
       else {
         return document.getElementsByTagName(element)[0].style.display = "none";
       }
+    },
+    show: function(element){
+      if (element.charAt(0) == "#"){
+        return document.getElementById(element.substring(1)).style.display = "";
+      }
+      else if (element.charAt(0) == "."){
+        var className = element.substring(1)
+        return document.getElementsByClassName(className)[0].style.display = ""
+      }
+      else {
+        return document.getElementsByTagName(element)[0].style.display = "";
+      }
     }
   }
 }())
