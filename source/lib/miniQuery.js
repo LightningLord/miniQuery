@@ -51,6 +51,13 @@
     }
   }
 
+  var EventDispatcher = {
+
+    on: function(passed) {
+
+    })
+  }
+
 
 
 
