@@ -10,11 +10,11 @@ SweetSelector.select = function(el){
   return document.querySelectorAll(el);
 }
 
-
 // DOM.hide('.klass') // hides the div
 // DOM.show('.klass') // shows the div
 
 DOM = {}
+
 DOM.hide = function(el){
   SweetSelector.select(el)[0].style.display = 'none'
 }
@@ -44,18 +44,34 @@ DOM.removeClass = function(el, className){
     element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
 }
 
-    // EventDispatcher.on('.klass', 'shadi', function() { console.log("awesome") });
-    // // this should print "awesome" in the console.
-    // EventDispatcher.trigger('.klass', 'shadi');
+// EventDispatcher.on('.klass', 'shadi', function() { console.log("awesome") });
+// EventDispatcher.trigger('.klass', 'shadi');
+// // this should print "awesome" in the console.
 
 EventDispatcher = {}
+
 EventDispatcher.on = function(el, eventName, eventHandler){
-  event = new Event(eventName)
   element = SweetSelector.select(el)[0]
   element.addEventListener(eventName, eventHandler);
 }
 
 EventDispatcher.trigger = function(el, eventName){
+  var event = new Event(eventName)
   element = SweetSelector.select(el)[0]
   element.dispatchEvent(event)
 }
+
+AjaxWrapper = {}
+
+AjaxWrapper.request = function(url, type, data){
+  reqListener = function(){
+    console.log(this.responseText);
+  }
+  var oReq = new XMLHttpRequest();
+  oReq.onload = reqListener;
+  oReq.open(type, url, true);
+  oReq.send(data);
+  debugger
+
+}
+
