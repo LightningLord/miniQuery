@@ -23,22 +23,31 @@
 
 
   // var eyed = document.querySelectorAll('div #eyed');
-  var eyed = document.getElementById("eyed")
-  var klass = document.getElementsByClassName("klass");
-  var hello = document.getElementsByTagName("a"); //the link
+  // var eyed = document.getElementById("eyed")
+  // var klass = document.getElementsByClassName("klass");
+  // var hello = document.getElementsByTagName("a"); //the link
 
 
-var SweetSelector = (function () {
+var SweetSelector = (function(){
 
   return {
     select: function(element) {
       // So if it starts with #, . , or tag different rules
-    };
+      if (element.charAt(0) == "#"){
+        return document.getElementById(element);
+      }
+      else if (element.charAt(0) == ".") {
+        return document.getElementsByClassName(element);
+      }
+      else {
+        return document.getElementsByTagName(element);
+      }
+    }
 
 
   };
 
-})
+}())
 
 SweetSelector.select("#eyed");
 SweetSelector.select(".klass");
