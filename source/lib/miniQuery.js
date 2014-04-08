@@ -64,9 +64,31 @@ DOM.prototype = {
     var selector = new SweetSelector();
     var element = selector.select(string);
     element.style.display = '';
+  },
+
+  addClass: function(element, string){
+    var selector = new SweetSelector();
+    var newElement = selector.select(element);
+    if (newElement.classList)
+      newElement.classList.add(string);
+    else
+      newElement.className += ' ' + className;
+  },
+
+  removeClass: function(element, string){
+    var selector = new SweetSelector();
+    var newElement = selector.select(element);
+    if (newElement.classList)
+      newElement.classList.remove(string);
+    else
+      newElement.className = newElement.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
   }
+
 };
   
+
+
+ //////////////////////////////////// 
 window.onload = function(){
   var selector = new SweetSelector();
   selector.select(".klass");
@@ -77,6 +99,8 @@ window.onload = function(){
   var dommer = new DOM();
   dommer.hide(".klass");
   dommer.show(".klass");
+  dommer.addClass('.klass', 'shadi');
+  // dommer.removeClass('.klass', 'shadi');
 
 };
 
