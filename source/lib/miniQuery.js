@@ -13,6 +13,9 @@
   DOM.show(".klass");
   console.log(DOM.addClass(".klass", "drew"));
   console.log(DOM.removeClass(".klass", "drew"));
+  // Release 2
+  EventDispatcher.on(".klass", "shadi", function() { console.log("awesome") });
+  // EventDispatcher.trigger(".klass", "shadi");
  },false)
 
 
@@ -53,9 +56,9 @@
 
   var EventDispatcher = {
 
-    on: function(passed) {
-
-    })
+    on: function(passed, call, paramFunc) {
+      paramFunc()
+    }
   }
 
 
