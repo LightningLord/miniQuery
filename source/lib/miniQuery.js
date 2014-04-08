@@ -122,17 +122,18 @@ Wrapper.prototype = {
   trigger: function(eventName) {
     EventDispatcher.trigger(this.input, eventName)
   }
-  // AJAX
 
 
 }
 
 var miniQuery = function(selector){
-  return new Wrapper(selector)
+    return new Wrapper(selector)
 }
 
+miniQuery.ajax = function(callDetails){
+    AjaxWrapper.request(callDetails)
 
-
+}
 
 
 
