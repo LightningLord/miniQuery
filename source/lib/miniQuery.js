@@ -47,9 +47,9 @@ SweetSelector.prototype = {
 
 };
 
+// DOM FUNCTION
 
 var DOM = function(){
-  var self = this;
 };
 
 
@@ -87,20 +87,52 @@ DOM.prototype = {
 };
   
 
+// EVENT DISPATCH
+
+var EventDispatcher = function(){
+  var self = this;
+  // var action = {};
+};
+
+EventDispatcher.prototype = {
+  on: function(string, eventName, eventHandler){
+    var selector = new SweetSelector();
+    element = selector.select(string);
+    element.addEventListener(eventName, eventHandler);
+  },
+
+  trigger: function(string, eventName){
+    var selector = new SweetSelector();
+    var el = selector.select(string);
+    var event  = new Event(eventName);
+    el.dispatchEvent(event);
+  }
+
+};
+
+
+
+
+
 
  //////////////////////////////////// 
 window.onload = function(){
-  var selector = new SweetSelector();
-  selector.select(".klass");
-  selector.select("#eyed");
-  console.log(selector.select(".klass"));
-  console.log(selector.select("#eyed"));
-  console.log(selector.select("a"));
-  var dommer = new DOM();
-  dommer.hide(".klass");
-  dommer.show(".klass");
-  dommer.addClass('.klass', 'shadi');
-  dommer.removeClass('.klass', 'shadi');
+  // var selector = new SweetSelector();
+  // selector.select(".klass");
+  // selector.select("#eyed");
+  // console.log(selector.select(".klass"));
+  // console.log(selector.select("#eyed"));
+  // console.log(selector.select("a"));
+  // var dommer = new DOM();
+  // dommer.hide(".klass");
+  // dommer.show(".klass");
+  // dommer.addClass('.klass', 'shadi');
+  // dommer.removeClass('.klass', 'shadi');
+  
+  var eventOn = new EventDispatcher();
+  eventOn.on('.klass', 'shadi', function() {console.log("awesome")});
+  // this should print "awesome" in the console.
+  eventOn.trigger('.klass', 'shadi');
 };
 
 
