@@ -100,8 +100,7 @@ window.onload = function(){
   dommer.hide(".klass");
   dommer.show(".klass");
   dommer.addClass('.klass', 'shadi');
-  // dommer.removeClass('.klass', 'shadi');
-
+  dommer.removeClass('.klass', 'shadi');
 };
 
 
