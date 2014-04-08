@@ -97,6 +97,23 @@ var AjaxWrapper = function(){
   }
 } ()
 
+var Wrapper = function(input){
+  this.domCollection = SweetSelector.select(input)
+  this.input = input
+}
+
+Wrapper.prototype = {
+  hide: function() {
+    DOM.hide(this.input)
+  },
+  show: function() {
+    DOM.show(this.input)
+  }
+}
+
+var miniQuery = function(selector){
+  return new Wrapper(selector)
+}
 
 
 
