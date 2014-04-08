@@ -107,10 +107,44 @@ EventDispatcher.prototype = {
     var event  = new Event(eventName);
     el.dispatchEvent(event);
   }
-
 };
 
 
+// AJAX
+
+
+
+var AjaxWrapper = function(){
+  var req = {};
+};
+
+AjaxWrapper.prototype.request = function(data){
+  req = new XMLHttpRequest();
+  req.open(data.type, data.url, true);
+  req.onload = data.success;
+  req.onerror = data.fail;
+  req.send();
+};
+
+
+  // request = new XMLHttpRequest();
+  // request.open('GET', '/my/url', true);
+
+  // request.onload = function() {
+  //   if (request.status >= 200 && request.status < 400){
+  //     // Success!
+  //     resp = request.responseText;
+  //   } else {
+  //     // We reached our target server, but it returned an error
+
+  //   }
+  // };
+
+  // request.onerror = function() {
+  //   // There was a connection error of some sort
+  // };
+
+  // request.send();
 
 
 
@@ -133,6 +167,19 @@ window.onload = function(){
   eventOn.on('.klass', 'shadi', function() {console.log("awesome")});
   // this should print "awesome" in the console.
   eventOn.trigger('.klass', 'shadi');
+
+  var ajax = new AjaxWrapper();
+  ajax.request({
+   url: '/beers/amber',
+   type: 'GET',
+   success: function() {
+     console.log("we successful");
+   },
+   fail: function() {
+     console.log("we failing");
+   }
+  });
+
 };
 
 
