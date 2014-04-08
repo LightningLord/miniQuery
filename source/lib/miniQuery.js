@@ -74,6 +74,18 @@ EventDispatcher.prototype = {
     } else {
       domCollection.addEventListener(event, callback)
     }
+  },
+
+  trigger: function(selector, event){
+    customEvent = new Event(event)
+    var domCollection = sweetSelector.select(selector)
+    if (domCollection.length) {
+      for (var i=0; i< domCollection.length; i++) {
+        domCollection[i].dispatchEvent(customEvent)
+      }
+    } else {
+      domCollection.dispatchEvent(customEvent)
+    }
   }
 }
 
