@@ -19,6 +19,8 @@ SweetSelector.prototype = {
     firstCharacter = string[0];
     if (firstCharacter === "."){
       result = self.selectByClass(self.parseString(string));
+    } elseif (firstCharacter === "#"){
+      result = self.selectById(self.parseString(string));
     }
     return result;
   },
@@ -26,7 +28,13 @@ SweetSelector.prototype = {
   selectByClass: function(element){
     returnElement = document.getElementsByClassName(element)[0];
     return returnElement;
+  },
+
+  selectById: function(element){
+    returnElement = document.getElementById(element)[0];
+    return returnElement;
   }
+
 };
   
 window.onload = function(){
