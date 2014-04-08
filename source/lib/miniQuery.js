@@ -108,6 +108,12 @@ Wrapper.prototype = {
   },
   show: function() {
     DOM.show(this.input)
+  },
+  addClass: function(newClass){
+    DOM.addClass(this.input, newClass)
+  },
+  removeClass: function(badClass){
+    DOM.removeClass(this.input, badClass)
   }
 }
 
