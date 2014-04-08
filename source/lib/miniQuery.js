@@ -90,17 +90,20 @@ DOM.show = function(element){
 var EventDispatcher = (function(){
   return {
     on: function(element, eventName, fn) {
-      eventName = new CustomEvent(fn)
-      elem = document.querySelectorAll(element)
+      elem = document.querySelectorAll(element)[0]
       elem.addEventListener(eventName, fn)
+      eventName = new Event(fn)
+      return eventName
+    },
+    trigger: function(element, eventName){
+      event = new Event(eventName)
+      elem = document.querySelectorAll(element)[0]
+      elem.dispatchEvent(event)
+
     }
   }
 }())
 
-EventDispatcher.trigger = function(element, eventName){
-  elem = document.querySelectorAll(element)
-  elem.dispatchEvent(eventName)
-}
 
 // EventDispatcher.on('.klass', 'shadi', function() { console.log("awesome") });
 // EventDispatcher.trigger('.klass', 'shadi');
