@@ -16,6 +16,11 @@
   // Release 2
   EventDispatcher.on(".klass", "shadi", function() { console.log("awesome") });
   // EventDispatcher.trigger(".klass", "shadi");
+  // Release 3
+  AjaxWrapper.request({
+    url: 'index.html',
+    type: 'GET'
+  })
  },false)
 
 
@@ -61,6 +66,27 @@
     }
   }
 
+  var AjaxWrapper = {
+
+    request: function(args) {
+      // debugger
+      url = args.url,
+      type = args.type
+      var oReq = new XMLHttpRequest();
+      oReq.open(type, url)
+      debugger
+      console.log(oReq)
+      console.log("Successfully able to " + type + " " + url )
+    },
+    success: function() {
+        console.log("Successfully able to " + type + url )
+      },
+      fail: function() {
+        console.log("Failed to " + type + url )
+      }
+    }
+
+    AjaxWrapper.prototype.request = function() { console.log("got here?")}
 
 
 
