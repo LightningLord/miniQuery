@@ -54,7 +54,7 @@ var DOM = (function(){
 
 
 
-var EventDispatcher = function(){
+var EventDispatcher = (function(){
   return {
     on: function(selector, event, callback){
       var domCollection = SweetSelector.select(selector)
@@ -79,12 +79,12 @@ var EventDispatcher = function(){
       }
     }
   }
-} ()
+})()
 
 
 
 
-var AjaxWrapper = function(){
+var AjaxWrapper = (function(){
   return {
     request: function(inputData){
       var req = new XMLHttpRequest()
@@ -93,9 +93,8 @@ var AjaxWrapper = function(){
       req.onerror = inputData.fail
       req.send()
     }
-
   }
-} ()
+})()
 
 var Wrapper = function(input){
   this.domCollection = SweetSelector.select(input)
@@ -122,8 +121,6 @@ Wrapper.prototype = {
   trigger: function(eventName) {
     EventDispatcher.trigger(this.input, eventName)
   }
-
-
 }
 
 var miniQuery = function(selector){
@@ -132,8 +129,6 @@ var miniQuery = function(selector){
 
 miniQuery.ajax = function(callDetails){
     AjaxWrapper.request(callDetails)
-
 }
 
-
-
+var $ = miniQuery
