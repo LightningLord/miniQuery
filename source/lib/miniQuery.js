@@ -32,17 +32,24 @@ var DOM = function(){
 DOM.prototype = {
   hide: function(selector){
     var domCollection = sweetSelector.select(selector)
-    for (var i = 0; i < domCollection.length; i++){
-      domCollection[i].style.display = 'none'
+    if (domCollection.length) {
+      for (var i = 0; i < domCollection.length; i++){
+        domCollection[i].style.display = 'none'
+      }
+    } else {
+      domCollection.style.display = 'none'
     }
   },
   show: function(selector){
     var domCollection = sweetSelector.select(selector)
-    for (var i = 0; i < domCollection.length; i++){
-      domCollection[i].style.display = 'block'
+    if (domCollection.length) {
+      for (var i = 0; i < domCollection.length; i++){
+        domCollection[i].style.display = 'block'
+      }
+    } else {
+      domCollection.style.display = 'block'
     }
   }
-
 }
 
 var dom = new DOM
