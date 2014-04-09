@@ -28,121 +28,226 @@
   // var hello = document.getElementsByTagName("a"); //the link
 
 
-var SweetSelector = (function(){
 
+//****************************MODULES***************************************
+
+// var SweetSelector = (function(){
+
+//   return {
+//     select: function(element) {
+//       // So if it starts with #, . , or tag different rules
+//       if (element.charAt(0) == "#"){
+//         return document.getElementById(element.substring(1));
+//       }
+//       else if (element.charAt(0) == ".") {
+//         return document.getElementsByClassName(element.substring(1));
+//       }
+//       else {
+//         return document.getElementsByTagName(element);
+//       }
+//     }
+//   };
+// }())
+
+// SweetSelector.select("#eyed");
+// SweetSelector.select(".klass");
+// SweetSelector.select("a");
+
+// var DOM = (function(){
+//   // function displayNone(element) {
+//   //   document.getElementsByClassName(element)[0].style.display = "none";
+//   return {
+//     hide: function(element) {
+//       if (element.charAt(0) == "#"){
+//         return document.getElementById(element.substring(1)).style.display = "none";
+//       }
+//       else if (element.charAt(0) == "."){
+//         var className = element.substring(1)
+//         return document.getElementsByClassName(className)[0].style.display = 'none'
+//       }
+//       else {
+//         return document.getElementsByTagName(element)[0].style.display = "none";
+//       }
+//     },
+//     show: function(element){
+//       if (element.charAt(0) == "#"){
+//         return document.getElementById(element.substring(1)).style.display = "";
+//       }
+//       else if (element.charAt(0) == "."){
+//         var className = element.substring(1)
+//         return document.getElementsByClassName(className)[0].style.display = ""
+//       }
+//       else {
+//         return document.getElementsByTagName(element)[0].style.display = "";
+//       }
+//     }
+//   }
+// }())
+
+
+// // DOM.hide('.klass')
+// // DOM.hide('#eyed')
+// // DOM.hide('a') // hides the div
+// // DOM.show('.klass') // shows the div
+
+// var EventDispatcher = (function(){
+//   return {
+//     on: function(element, eventName, fn) {
+//       elem = document.querySelectorAll(element)[0]
+//       elem.addEventListener(eventName, fn)
+//       eventName = new Event(fn)
+//       return eventName
+//     },
+//     trigger: function(element, eventName){
+//       event = new Event(eventName)
+//       elem = document.querySelectorAll(element)[0]
+//       elem.dispatchEvent(event)
+
+//     }
+//   }
+// }())
+
+
+// // EventDispatcher.on('.klass', 'shadi', function() { console.log("awesome") });
+// // EventDispatcher.trigger('.klass', 'shadi');
+// // this should print "awesome" in the console.
+
+
+
+// var AjaxWrapper = (function(){
+//   return {
+//     request: function(args){
+//       newRequest = new XMLHttpRequest();
+//       newRequest.open(args.type, args.url, true);
+
+//       newRequest.onload = function() {
+//         if (newRequest.status >= 200 && newRequest.status < 400){
+//           args.success
+//           resp = newRequest.responseText;
+//         }
+//         else {
+//           console.log("Error: newRequest failed")
+//         }
+//       };
+//       newRequest.onerror = function() {
+//         console.log("Fail")
+//       };
+//       newRequest.send();
+//     }
+//   }
+// }());
+
+
+//TEST CODE FOR RELEASE 4(AJAX)
+// AjaxWrapper.request({
+//   type: 'GET',
+//   url: 'http://www.google.com',
+//   success: function(){console.log('hi')},
+//   error: function(){console.log('error')}
+// });
+
+// module = (function(){
+//   return {
+//     method: function(){}
+//   }
+// }())
+
+// module = (function(){
+//   return {
+//     module = (function(){
+//       return {
+//         method: function(){}
+//       }
+//     })
+//   }
+// }())
+
+var miniQuery = (function(){
   return {
-    select: function(element) {
-      // So if it starts with #, . , or tag different rules
-      if (element.charAt(0) == "#"){
-        return document.getElementById(element.substring(1));
-      }
-      else if (element.charAt(0) == ".") {
-        return document.getElementsByClassName(element.substring(1));
-      }
-      else {
-        return document.getElementsByTagName(element);
-      }
-    }
-  };
-}())
+    SweetSelector: (function(){
 
-SweetSelector.select("#eyed");
-SweetSelector.select(".klass");
-SweetSelector.select("a");
-
-var DOM = (function(){
-  // function displayNone(element) {
-  //   document.getElementsByClassName(element)[0].style.display = "none";
-  return {
-    hide: function(element) {
-      if (element.charAt(0) == "#"){
-        return document.getElementById(element.substring(1)).style.display = "none";
-      }
-      else if (element.charAt(0) == "."){
-        var className = element.substring(1)
-        return document.getElementsByClassName(className)[0].style.display = 'none'
-      }
-      else {
-        return document.getElementsByTagName(element)[0].style.display = "none";
-      }
-    },
-    show: function(element){
-      if (element.charAt(0) == "#"){
-        return document.getElementById(element.substring(1)).style.display = "";
-      }
-      else if (element.charAt(0) == "."){
-        var className = element.substring(1)
-        return document.getElementsByClassName(className)[0].style.display = ""
-      }
-      else {
-        return document.getElementsByTagName(element)[0].style.display = "";
-      }
-    }
-  }
-}())
+      return {
+        select: function(element) {
+          if (element.charAt(0) == "#"){
+            return document.getElementById(element.substring(1));
+          }
+          else if (element.charAt(0) == ".") {
+            return document.getElementsByClassName(element.substring(1));
+          }
+          else {
+            return document.getElementsByTagName(element);
+          }//else
+        },//select method
 
 
-// DOM.hide('.klass')
-// DOM.hide('#eyed')
-// DOM.hide('a') // hides the div
-// DOM.show('.klass') // shows the div
+    DOM : (function(){
 
-var EventDispatcher = (function(){
-  return {
-    on: function(element, eventName, fn) {
-      elem = document.querySelectorAll(element)[0]
-      elem.addEventListener(eventName, fn)
-      eventName = new Event(fn)
-      return eventName
-    },
-    trigger: function(element, eventName){
-      event = new Event(eventName)
-      elem = document.querySelectorAll(element)[0]
-      elem.dispatchEvent(event)
+      return {
+        hide: function(element) {
+          if (element.charAt(0) == "#"){
+            return document.getElementById(element.substring(1)).style.display = "none";
+          }
+          else if (element.charAt(0) == "."){
+            var className = element.substring(1)
+            return document.getElementsByClassName(className)[0].style.display = 'none'
+          }
+          else {
+            return document.getElementsByTagName(element)[0].style.display = "none";
+          }
+        },
+        show: function(element){
+          if (element.charAt(0) == "#"){
+            return document.getElementById(element.substring(1)).style.display = "";
+          }
+          else if (element.charAt(0) == "."){
+            var className = element.substring(1)
+            return document.getElementsByClassName(className)[0].style.display = ""
+          }
+          else {
+            return document.getElementsByTagName(element)[0].style.display = "";
+          }//else
+        },//show method
 
-    }
-  }
-}())
 
+    EventDispatcher : (function(){
 
-// EventDispatcher.on('.klass', 'shadi', function() { console.log("awesome") });
-// EventDispatcher.trigger('.klass', 'shadi');
-// this should print "awesome" in the console.
+      return {
+        on: function(element, eventName, fn) {
+          elem = document.querySelectorAll(element)[0]
+          elem.addEventListener(eventName, fn)
+          eventName = new Event(fn)
+          return eventName
+        },
+        trigger: function(element, eventName){
+          event = new Event(eventName)
+          elem = document.querySelectorAll(element)[0]
+          elem.dispatchEvent(event)
 
-
-
-// ********************RELEASE4 PENDING******************************
-var AjaxWrapper = (function(){
-  return {
-    request: function(args){
-      newRequest = new XMLHttpRequest();
-      newRequest.open(args.type, args.url, true);
-
-      newRequest.onload = function() {
-        if (newRequest.status >= 200 && newRequest.status < 400){
-          args.success
-          resp = newRequest.responseText;
         }
-        else {
-          console.log("Error: newRequest failed")
+      },
+
+
+    AjaxWrapper : (function(){
+      return {
+        request: function(args){
+          newRequest = new XMLHttpRequest();
+          newRequest.open(args.type, args.url, true);
+
+          newRequest.onload = function() {
+            if (newRequest.status >= 200 && newRequest.status < 400){
+              args.success
+              resp = newRequest.responseText;
+            }
+            else {
+              console.log("Error: newRequest failed")
+            }
+          };
+          newRequest.onerror = function() {
+            console.log("Fail")
+          };
+          newRequest.send();
         }
-      };
-      newRequest.onerror = function() {
-        console.log("Fail")
-      };
-      newRequest.send();
-    }
+      }
+
   }
-}());
-
-
-// ****TEST CODE FOR RELEASE 4(AJAX)****
-AjaxWrapper.request({
-  type: 'GET',
-  url: 'http://www.google.com',
-  success: function(){console.log('hi')},
-  error: function(){console.log('error')}
-});
-
-
-// var miniQuery = (function())
+}())
