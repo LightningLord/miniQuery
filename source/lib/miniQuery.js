@@ -81,18 +81,6 @@ var DOM = (function(){
   }
 }())
 
-// DOM.show = function(element){
-//   if (element.charAt(0) == "#"){
-//     return document.getElementById(element.substring(1)).style.display = "";
-//   }
-//   else if (element.charAt(0) == "."){
-//     var className = element.substring(1)
-//     return document.getElementsByClassName(className)[0].style.display = ""
-//   }
-//   else {
-//     return document.getElementsByTagName(element)[0].style.display = "";
-//   }
-// }
 
 // DOM.hide('.klass')
 // DOM.hide('#eyed')
@@ -120,3 +108,41 @@ var EventDispatcher = (function(){
 // EventDispatcher.on('.klass', 'shadi', function() { console.log("awesome") });
 // EventDispatcher.trigger('.klass', 'shadi');
 // this should print "awesome" in the console.
+
+
+
+// ********************RELEASE4 PENDING******************************
+var AjaxWrapper = (function(){
+  return {
+    request: function(args){
+      newRequest = new XMLHttpRequest();
+      newRequest.open(args.type, args.url, true);
+
+      newRequest.onload = function() {
+        if (newRequest.status >= 200 && newRequest.status < 400){
+          args.success
+          resp = newRequest.responseText;
+        }
+        else {
+          console.log("Error: newRequest failed")
+        }
+      };
+      newRequest.onerror = function() {
+        args.error
+      };
+      newRequest.send();
+    }
+  }
+})
+
+
+// AjaxWrapper.request({
+//  url: 'someurl',
+//  type: 'GET',
+//  success: function() {
+//    //do something
+//  },
+//  fail: function() {
+//   //do something
+//  }
+// });
