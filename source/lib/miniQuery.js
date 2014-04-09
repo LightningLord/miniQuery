@@ -5,26 +5,30 @@
  window.addEventListener("load", function load(event){
   window.removeEventListener("load", load, false);
   // Release 0
-  console.log(SweetSelector.select("#eyed"));
-  console.log(SweetSelector.select(".klass"));
-  console.log(SweetSelector.select("a"));
+  console.log($.select("#eyed"));
+  console.log($.select(".klass"));
+  console.log($.select("a"));
   // Release 1
-  DOM.hide(".klass");
-  DOM.show(".klass");
-  console.log(DOM.addClass(".klass", "drew"));
-  console.log(DOM.removeClass(".klass", "drew"));
+  $.hide(".klass");
+  $.show(".klass");
+  console.log($.addClass(".klass", "drew"));
+  console.log($.removeClass(".klass", "drew"));
   // Release 2
-  EventDispatcher.on(".klass", "shadi", function() { console.log("awesome") });
-  // EventDispatcher.trigger(".klass", "shadi");
+  $.on(".klass", "shadi", function() { console.log("awesome") });
+  $.trigger(".klass", "shadi");
   // Release 3
-  AjaxWrapper.request({
+  $.request({
     url: 'index.html',
-    type: 'GET'
+    type: 'GET',
+    success: function() {
+    },
+    fail: function() {
+    }
   })
+  $.success()
  },false)
 
-
-  var SweetSelector = {
+ var $ = {
 
     select: function(passed) {
       if (passed[0] == '#') {
@@ -37,73 +41,57 @@
           var tag = passed
           return document.getElementsByTagName(tag)[0]
       }
-    }
-  }
-
-  var DOM = {
+    },
 
     hide: function(passed) {
-      SweetSelector.select(passed).style.display = 'none'
+      $.select(passed).style.display = 'none'
     },
 
     show: function(passed) {
-      SweetSelector.select(passed).style.display = 'block'
+      $.select(passed).style.display = 'block'
     },
 
     addClass: function(passed, newClass) {
-      return SweetSelector.select(passed).className = SweetSelector.select(passed).className + " " + newClass
+      return $.select(passed).className = $.select(passed).className + " " + newClass
     },
 
     removeClass: function(passed, removeClass) {
-      return SweetSelector.select(passed).className = SweetSelector.select(passed).className.split(" ")[0]
-    }
-  }
-
-  var EventDispatcher = {
+      return $.select(passed).className = $.select(passed).className.split(" ")[0]
+    },
 
     on: function(passed, call, paramFunc) {
-      paramFunc()
-    }
-  }
+      // paramFunc()
+      // var event = new Event(call)
+      var event = new Event('build')
 
-  var AjaxWrapper = {
+      document.addEventListener('build', paramFunc(), false)
+    },
+
+    trigger: function(passed, call) {
+      // document.call()
+      // passed.dispatchEvent(call)
+      // document.dispatchEvent(event)
+    },
 
     request: function(args) {
-      // debugger
       url = args.url,
       type = args.type
-      var oReq = new XMLHttpRequest();
-      oReq.open(type, url)
-      debugger
-      console.log(oReq)
-      console.log("Successfully able to " + type + " " + url )
-    },
-    success: function() {
-        console.log("Successfully able to " + type + url )
-      },
-      fail: function() {
-        console.log("Failed to " + type + url )
+      success = args.success
+      var request = new XMLHttpRequest();
+      request.open(type, url, true)
+      if (request.status >= 200 && request.status < 400) {
+        console.log("Successfully able to " + type + url)
+      } else {
+        console.log("Failed to " + type + " " + url)
+        $.fail
       }
+    },
+
+    success: function() {
+      console.log("Successfully able to " + type + " " + url)
+    },
+
+    fail: function() {
+      console.log("Failed to " + type + " " + url)
     }
-
-    AjaxWrapper.prototype.request = function() { console.log("got here?")}
-
-
-
-
-
-// function miniQuery(){
-//   alert("here")
-
-
-
-//   SweetSelector.select("stuff")
-// }
-
-
-  // console.log('success')
-  // console.log('x')
-
-  // // var x = document.getElementById("#eyed")
-  // // console.log("x")
-  // )
+}
