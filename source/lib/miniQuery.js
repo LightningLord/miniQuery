@@ -128,21 +128,21 @@ var AjaxWrapper = (function(){
         }
       };
       newRequest.onerror = function() {
-        args.error
+        console.log("Fail")
       };
       newRequest.send();
     }
   }
-})
+}());
 
 
-// AjaxWrapper.request({
-//  url: 'someurl',
-//  type: 'GET',
-//  success: function() {
-//    //do something
-//  },
-//  fail: function() {
-//   //do something
-//  }
-// });
+// ****TEST CODE FOR RELEASE 4(AJAX)****
+AjaxWrapper.request({
+  type: 'GET',
+  url: 'http://www.google.com',
+  success: function(){console.log('hi')},
+  error: function(){console.log('error')}
+});
+
+
+// var miniQuery = (function())
