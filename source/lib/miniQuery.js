@@ -25,16 +25,6 @@
   }
 })()
 
-var EventDispatcher = (function(){
-  return {
-    on: function(divElems, eventName, eventHandler){
-      for(var i = 0; i < divElems.length; i++){
-         divElems[i].addEventListener(eventName, eventHandler)
-      }
-    }
-  }
-})();
-
 var miniQuery = (function(DOM){
   var Selection = function(selector){
     this.divElems = document.querySelectorAll(selector)
@@ -44,8 +34,7 @@ var miniQuery = (function(DOM){
     show: function(){DOM.show(this.divElems)},
     hide: function(){DOM.hide(this.divElems)},
     addClass: function(className){DOM.addClass(this.divElems, className)},
-    removeClass: function(className){DOM.removeClass(this.divElems, className)},
-    on: function(eventName, eventHandler){EventDispatcher.on(this.divElems, eventName, eventHandler)}
+    removeClass: function(className){DOM.removeClass(this.divElems, className)}
   }
 
   var selectionCreator = function(selector){
@@ -53,8 +42,37 @@ var miniQuery = (function(DOM){
   }
 
   return selectionCreator
-})(DOM, EventDispatcher)
+})(DOM)
 
+
+//     DOM: {
+//       hide: function(selector){
+//         var divElems = miniQuery.SweetSelector.select(selector)
+//         for(var i = 0; i < divElems.length; i++){
+//          divElems[i].style.display = 'none';
+//         }
+//       },
+//       show: function(selector){
+//         var divElems = miniQuery.SweetSelector.select(selector)
+//         for(var i = 0; i < divElems.length; i++){
+//          divElems[i].style.display = '';
+//         }
+//       },
+//       removeClass: function(selector, className){
+//         var divElems = miniQuery.SweetSelector.select(selector)
+//         for(var i = 0; i < divElems.length; i++){
+//          divElems[i].classList.remove(className)
+//          console.log(divElems[i])
+//         }
+//       },
+
+//       addClass: function(selector, className){
+//         var divElems = miniQuery.SweetSelector.select(selector)
+//         for(var i = 0; i < divElems.length; i++){
+//          divElems[i].classList.add(className)
+//         }
+//       }
+//     },
 //     EventDispatcher: {
 //       on: function(selector, eventName, eventHandler){
 //        var divElems = miniQuery.SweetSelector.select(selector)
