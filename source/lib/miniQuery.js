@@ -118,15 +118,23 @@ EventDispatcher.trigger = function(el, eventName){
 
 AjaxWrapper = {}
 
-AjaxWrapper.request = function(url, type, data){
-  reqListener = function(){
-    console.log(this.responseText);
-  }
-  var oReq = new XMLHttpRequest();
-  oReq.onload = reqListener;
-  oReq.open(type, url, true);
-  oReq.send(data);
-  debugger
-
+AjaxWrapper.request = function(params){
+  myRequest = new XMLHttpRequest();
+  myRequest.open(params.type, params.url, true);
+  myRequest.onload = function() {
+    if (myRequest.status >= 200 && myRequest.status < 400){
+      // Success!
+      resp = myRequest.responseText;
+      params.success
+    } else {
+      // We reached our target server, but it returned an error
+      console.log("Error Message")
+    }
+  };
+  request.onerror = function() {
+    // There was a connection error of some sort
+    params.fail
+  };
+  request.send(params.data);
 }
 
