@@ -72,13 +72,13 @@ var EventDispatcher = {
 
 
 var AjaxWrapper = {
-    request: function(inputData){
-      var req = new XMLHttpRequest()
-      req.open(inputData.type, inputData.url, true)
-      req.onload = inputData.success
-      req.onerror = inputData.fail
-      req.send()
-    }
+  request: function(inputData){
+    var req = new XMLHttpRequest()
+    req.open(inputData.type, inputData.url, true)
+    req.onload = inputData.success
+    req.onerror = inputData.fail
+    req.send()
+  }
 }
 
 var Wrapper = function(input){
@@ -115,11 +115,11 @@ Wrapper.prototype = {
 }
 
 var miniQuery = function(selector){
-    return new Wrapper(selector)
+  return new Wrapper(selector)
 }
 
 miniQuery.ajax = function(callDetails){
-    AjaxWrapper.request(callDetails)
+  AjaxWrapper.request(callDetails)
 }
 
 var $ = miniQuery
