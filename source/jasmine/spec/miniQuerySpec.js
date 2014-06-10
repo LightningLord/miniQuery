@@ -87,3 +87,48 @@ describe("DOM", function(){
     })
   })
 })
+
+describe("EventDispather", function(){
+  it("is defined", function(){
+    expect(EventDispatcher).toBeDefined()
+  })
+  describe("on and trigger", function(){
+    it("on is defined", function(){
+      expect(EventDispatcher.on).toBeDefined()
+    })
+    it("trigger is defined", function(){
+      expect(EventDispatcher.trigger).toBeDefined()
+    })
+    describe("can bind and trigger event listeners", function(){
+      it("to a single element", function(){
+        var eventTarget;
+        var success = false;
+        EventDispatcher.on("#eyed", "testEvent", function(e){
+          eventTarget = e
+          success = true
+        })
+        EventDispatcher.trigger("#eyed", "testEvent")
+        expect(success).toBeTruthy()
+        expect(eventTarget).toBeTruthy()
+      })
+      it("to a collection of elements", function(){
+        var eventTarget;
+        var success = false;
+        EventDispatcher.on(".klass", "testEvent", function(e){
+          eventTarget = e
+          success = true
+        })
+        EventDispatcher.trigger(".klass", "testEvent")
+        expect(success).toBeTruthy()
+        expect(eventTarget).toBeTruthy()
+      })
+    })
+
+  })
+})
+
+
+
+
+
+
