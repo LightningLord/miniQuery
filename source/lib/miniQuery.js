@@ -1,25 +1,14 @@
 
-var SweetSelector = (function(){
-  return {
+var SweetSelector = {
     select: function(selector){
-      var selectorName = selector.substring(1)
-      if (selector[0] == '#'){
-        return document.getElementById(selectorName)
-      } else if (selector[0] == '.'){
-        return document.getElementsByClassName(selectorName)
-      } else {
-        return document.getElementsByTagName(selector)
-      }
+      return document.querySelectorAll(selector)
     }
-
-  }
-}) ()
+}
 
 
 
 var DOM = (function(){
   return {
-
     domCollection: function(selector){
       return SweetSelector.select(selector)
     },
@@ -43,11 +32,17 @@ var DOM = (function(){
     },
 
     addClass: function(selector, newClass){
-      this.domCollection(selector).classList.add(newClass)
+      var collection = this.domCollection(selector)
+      for(var i = 0; i < collection.length; i++ ){
+        collection[i].classList.add(newClass)
+      }
     },
 
     removeClass: function(selector, badClass){
-      this.domCollection(selector).classList.remove(badClass)
+      var collection = this.domCollection(selector)
+      for(var i = 0; i < collection.length; i++ ){
+        collection[i].classList.remove(badClass)
+      }
     }
   }
 }) ()
