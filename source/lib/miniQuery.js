@@ -5,41 +5,36 @@ var SweetSelector = {
     }
 }
 
-
-
 var DOM = (function(){
-  return {
-    domCollection: function(selector){
+    var domCollection = function(selector){
       return SweetSelector.select(selector)
-    },
+    }
 
-    changeDisplay: function(cssAttribute, domCollection){
-      if (domCollection.length) {
-        for (var i = 0; i < domCollection.length; i++){
-          domCollection[i].style.display = cssAttribute
-        }
-      } else {
-        domCollection.style.display = cssAttribute
+    var changeDisplay = function(cssAttribute, domCollection){
+      for (var i = 0; i < domCollection.length; i++){
+        domCollection[i].style.display = cssAttribute
       }
-    },
+    }
+  return {
+
 
     hide: function(selector){
-      this.changeDisplay('none', this.domCollection(selector))
+      changeDisplay('none', domCollection(selector))
     },
 
     show: function(selector){
-      this.changeDisplay('block', this.domCollection(selector))
+      changeDisplay('block', domCollection(selector))
     },
 
     addClass: function(selector, newClass){
-      var collection = this.domCollection(selector)
+      var collection = domCollection(selector)
       for(var i = 0; i < collection.length; i++ ){
         collection[i].classList.add(newClass)
       }
     },
 
     removeClass: function(selector, badClass){
-      var collection = this.domCollection(selector)
+      var collection = domCollection(selector)
       for(var i = 0; i < collection.length; i++ ){
         collection[i].classList.remove(badClass)
       }
