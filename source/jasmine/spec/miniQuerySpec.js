@@ -158,6 +158,104 @@ describe("AjaxWrapper", function(){
 
 })
 
+describe("Wrapper", function(){
+  it("is defined", function(){
+    expect(Wrapper).toBeDefined()
+  })
+  it("has attribute DOM collection", function(){
+    var wrapper = new Wrapper("#eyed")
+    expect(wrapper.domCollection).toBe(SweetSelector.select("#eyed"))
+  })
+  it("has attribute input", function(){
+    var wrapper = new Wrapper("#eyed")
+    expect(wrapper.input).toBe("#eyed")
+  })
+  describe("hide", function(){
+    var wrapper = new Wrapper("#eyed")
+    it("is defined", function(){
+      expect(wrapper.hide).toBeDefined()
+    })
+    it("calls DOM.hide", function(){
+      spyOn(DOM, 'hide')
+      wrapper.hide()
+      expect(DOM.hide).toHaveBeenCalled()
+    })
+    it("returns the wrapper", function(){
+      expect(wrapper.hide()).toBe(wrapper)
+    })
+  })
+  describe("show", function(){
+    var wrapper = new Wrapper("#eyed")
+    it("is defined", function(){
+      expect(wrapper.show).toBeDefined()
+    })
+    it("calls Dom.show", function(){
+      spyOn(DOM, 'show')
+      wrapper.show()
+      expect(DOM.show).toHaveBeenCalled()
+    })
+    it("returns the wrapper", function(){
+      expect(wrapper.show()).toBe(wrapper)
+    })
+  })
+  describe("addClass", function(){
+    var wrapper = new Wrapper("#eyed")
+    it("is defined", function(){
+      expect(wrapper.addClass).toBeDefined()
+    })
+    it("calls DOM.addClass", function(){
+      spyOn(DOM, 'addClass')
+      wrapper.addClass('new-class')
+      expect(DOM.addClass).toHaveBeenCalled()
+    })
+    it("returns the wrapper", function(){
+      expect(wrapper.addClass()).toBe(wrapper)
+    })
+  })
+  describe("removeClass", function(){
+    var wrapper = new Wrapper("#eyed")
+    it("is defined", function(){
+      expect(wrapper.removeClass).toBeDefined()
+    })
+    it("calls DOM.removeClass", function(){
+      spyOn(DOM,'removeClass')
+      wrapper.removeClass('.klass')
+      expect(DOM.removeClass).toHaveBeenCalled()
+    })
+    it("returns the wrapper", function(){
+      expect(wrapper.removeClass()).toBe(wrapper)
+    })
+  })
+  describe("on", function(){
+    var wrapper = new Wrapper("#eyed")
+    it("is defined", function(){
+      expect(wrapper.on).toBeDefined()
+    })
+    it("calls EventDispatcher.on", function(){
+      spyOn(EventDispatcher, 'on')
+      wrapper.on()
+      expect(EventDispatcher.on).toHaveBeenCalled()
+    })
+    it("returns the wrapper", function(){
+      expect(wrapper.on()).toBe(wrapper)
+    })
+  })
+  describe("trigger", function(){
+    var wrapper = new Wrapper("#eyed")
+    it("is defined", function(){
+      expect(wrapper.trigger).toBeDefined()
+    })
+    it("calls EventDispatcher.trigger", function(){
+      spyOn(EventDispatcher, 'trigger')
+      wrapper.trigger()
+      expect(EventDispatcher.trigger).toHaveBeenCalled()
+    })
+    it("returns the wrapper", function(){
+      expect(wrapper.trigger()).toBe(wrapper)
+    })
+  })
+
+})
 
 
 
