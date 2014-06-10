@@ -127,7 +127,36 @@ describe("EventDispather", function(){
   })
 })
 
+describe("AjaxWrapper", function(){
+  it("is defined", function(){
+    expect(AjaxWrapper).toBeDefined()
+  })
+  describe("request", function(){
+    it("is defined", function(){
+      expect(AjaxWrapper.request).toBeDefined()
+    })
+    it("can make an Ajax request", function(){
+      jasmine.Ajax.install()
+      var done = jasmine.createSpy("success")
 
+      jasmine.Ajax.stubRequest("/awesome/url").andReturn({
+        "responseText": "response"
+      })
+
+      AjaxWrapper.request({
+        url: '/awesome/url',
+        type: 'GET',
+        success: function(){
+          done("this.responseText")
+        }
+      })
+
+      expect(jasmine.Ajax.requests.mostRecent().url).toBe('/awesome/url')
+      expect(done).toHaveBeenCalled()
+    })
+  })
+
+})
 
 
 
