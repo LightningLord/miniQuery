@@ -257,5 +257,29 @@ describe("Wrapper", function(){
 
 })
 
+describe("miniQuery", function(){
+  it("returns a new Wrapper", function(){
+    expect(miniQuery('#eyed')).toEqual(new Wrapper("#eyed"))
+  })
+  describe(".ajax", function(){
+    it("is defined", function(){
+      expect(miniQuery.ajax).toBeDefined
+    })
+    it("calls AjaxWrapper.request", function(){
+      spyOn(AjaxWrapper, 'request')
+      miniQuery.ajax()
+      expect(AjaxWrapper.request).toHaveBeenCalled()
+    })
+  })
+})
+
+describe("$", function(){
+  it("is equal to miniQuery", function(){
+    expect($).toEqual(miniQuery)
+  })
+})
+
+
+
 
 
