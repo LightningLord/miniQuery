@@ -1,23 +1,21 @@
 
 var SweetSelector = {
-    select: function(selector){
-      return document.querySelectorAll(selector)
-    }
+  select: function(selector){
+    return document.querySelectorAll(selector)
+  }
 }
 
 var DOM = (function(){
-    var domCollection = function(selector){
-      return SweetSelector.select(selector)
-    }
+  var domCollection = function(selector){
+    return SweetSelector.select(selector)
+  }
 
-    var changeDisplay = function(cssAttribute, domCollection){
-      for (var i = 0; i < domCollection.length; i++){
-        domCollection[i].style.display = cssAttribute
-      }
+  var changeDisplay = function(cssAttribute, domCollection){
+    for (var i = 0; i < domCollection.length; i++){
+      domCollection[i].style.display = cssAttribute
     }
+  }
   return {
-
-
     hide: function(selector){
       changeDisplay('none', domCollection(selector))
     },
@@ -44,38 +42,36 @@ var DOM = (function(){
 
 
 
-var EventDispatcher = (function(){
-  return {
-    on: function(selector, event, callback){
-      var domCollection = SweetSelector.select(selector)
-      if (domCollection.length) {
-        for (var i=0; i< domCollection.length; i++) {
-          domCollection[i].addEventListener(event, callback)
-        }
-      } else {
-        domCollection.addEventListener(event, callback)
+var EventDispatcher = {
+  on: function(selector, event, callback){
+    var domCollection = SweetSelector.select(selector)
+    if (domCollection.length) {
+      for (var i=0; i< domCollection.length; i++) {
+        domCollection[i].addEventListener(event, callback)
       }
-    },
+    } else {
+      domCollection.addEventListener(event, callback)
+    }
+  },
 
-    trigger: function(selector, event){
-      customEvent = new Event(event)
-      var domCollection = SweetSelector.select(selector)
-      if (domCollection.length) {
-        for (var i=0; i< domCollection.length; i++) {
-          domCollection[i].dispatchEvent(customEvent)
-        }
-      } else {
-        domCollection.dispatchEvent(customEvent)
+  trigger: function(selector, event){
+    customEvent = new Event(event)
+    var domCollection = SweetSelector.select(selector)
+    if (domCollection.length) {
+      for (var i=0; i< domCollection.length; i++) {
+        domCollection[i].dispatchEvent(customEvent)
       }
+    } else {
+      domCollection.dispatchEvent(customEvent)
     }
   }
-})()
+
+}
 
 
 
 
-var AjaxWrapper = (function(){
-  return {
+var AjaxWrapper = {
     request: function(inputData){
       var req = new XMLHttpRequest()
       req.open(inputData.type, inputData.url, true)
@@ -83,8 +79,7 @@ var AjaxWrapper = (function(){
       req.onerror = inputData.fail
       req.send()
     }
-  }
-})()
+}
 
 var Wrapper = function(input){
   this.domCollection = SweetSelector.select(input)
