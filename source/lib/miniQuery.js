@@ -1,15 +1,13 @@
-
 var SweetSelector = {
   select: function(selector){
     return document.querySelectorAll(selector)
   }
 }
-
 var DOM = (function(){
+  //closure
   var domCollection = function(selector){
     return SweetSelector.select(selector)
   }
-
   var changeDisplay = function(cssAttribute, domCollection){
     for (var i = 0; i < domCollection.length; i++){
       domCollection[i].style.display = cssAttribute
@@ -19,18 +17,15 @@ var DOM = (function(){
     hide: function(selector){
       changeDisplay('none', domCollection(selector))
     },
-
     show: function(selector){
       changeDisplay('block', domCollection(selector))
     },
-
     addClass: function(selector, newClass){
       var collection = domCollection(selector)
       for(var i = 0; i < collection.length; i++ ){
         collection[i].classList.add(newClass)
       }
     },
-
     removeClass: function(selector, badClass){
       var collection = domCollection(selector)
       for(var i = 0; i < collection.length; i++ ){
@@ -38,38 +33,23 @@ var DOM = (function(){
       }
     }
   }
-}) ()
-
-
+})()
 
 var EventDispatcher = {
   on: function(selector, event, callback){
     var domCollection = SweetSelector.select(selector)
-    if (domCollection.length) {
-      for (var i=0; i< domCollection.length; i++) {
-        domCollection[i].addEventListener(event, callback)
-      }
-    } else {
-      domCollection.addEventListener(event, callback)
+    for (var i=0; i< domCollection.length; i++) {
+      domCollection[i].addEventListener(event, callback)
     }
   },
-
   trigger: function(selector, event){
     customEvent = new Event(event)
     var domCollection = SweetSelector.select(selector)
-    if (domCollection.length) {
-      for (var i=0; i< domCollection.length; i++) {
-        domCollection[i].dispatchEvent(customEvent)
-      }
-    } else {
-      domCollection.dispatchEvent(customEvent)
+    for (var i=0; i< domCollection.length; i++) {
+      domCollection[i].dispatchEvent(customEvent)
     }
   }
-
 }
-
-
-
 
 var AjaxWrapper = {
   request: function(inputData){
@@ -123,3 +103,4 @@ miniQuery.ajax = function(callDetails){
 }
 
 var $ = miniQuery
+
