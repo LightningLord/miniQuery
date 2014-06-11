@@ -1,4 +1,3 @@
-
 var SweetSelector = {
   select: function(selector){
     return document.querySelectorAll(selector)
@@ -9,7 +8,6 @@ var DOM = (function(){
   var domCollection = function(selector){
     return SweetSelector.select(selector)
   }
-
   var changeDisplay = function(cssAttribute, domCollection){
     for (var i = 0; i < domCollection.length; i++){
       domCollection[i].style.display = cssAttribute
@@ -19,18 +17,15 @@ var DOM = (function(){
     hide: function(selector){
       changeDisplay('none', domCollection(selector))
     },
-
     show: function(selector){
       changeDisplay('block', domCollection(selector))
     },
-
     addClass: function(selector, newClass){
       var collection = domCollection(selector)
       for(var i = 0; i < collection.length; i++ ){
         collection[i].classList.add(newClass)
       }
     },
-
     removeClass: function(selector, badClass){
       var collection = domCollection(selector)
       for(var i = 0; i < collection.length; i++ ){
@@ -38,7 +33,7 @@ var DOM = (function(){
       }
     }
   }
-}) ()
+})()
 
 
 
@@ -49,7 +44,6 @@ var EventDispatcher = {
       domCollection[i].addEventListener(event, callback)
     }
   },
-
   trigger: function(selector, event){
     customEvent = new Event(event)
     var domCollection = SweetSelector.select(selector)
@@ -57,11 +51,7 @@ var EventDispatcher = {
       domCollection[i].dispatchEvent(customEvent)
     }
   }
-
 }
-
-
-
 
 var AjaxWrapper = {
   request: function(inputData){
