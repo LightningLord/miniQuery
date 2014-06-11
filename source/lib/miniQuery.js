@@ -45,24 +45,16 @@ var DOM = (function(){
 var EventDispatcher = {
   on: function(selector, event, callback){
     var domCollection = SweetSelector.select(selector)
-    if (domCollection.length) {
-      for (var i=0; i< domCollection.length; i++) {
-        domCollection[i].addEventListener(event, callback)
-      }
-    } else {
-      domCollection.addEventListener(event, callback)
+    for (var i=0; i< domCollection.length; i++) {
+      domCollection[i].addEventListener(event, callback)
     }
   },
 
   trigger: function(selector, event){
     customEvent = new Event(event)
     var domCollection = SweetSelector.select(selector)
-    if (domCollection.length) {
-      for (var i=0; i< domCollection.length; i++) {
-        domCollection[i].dispatchEvent(customEvent)
-      }
-    } else {
-      domCollection.dispatchEvent(customEvent)
+    for (var i=0; i< domCollection.length; i++) {
+      domCollection[i].dispatchEvent(customEvent)
     }
   }
 
