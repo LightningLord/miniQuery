@@ -3,8 +3,8 @@ var SweetSelector = {
     return document.querySelectorAll(selector)
   }
 }
-
 var DOM = (function(){
+  //closure
   var domCollection = function(selector){
     return SweetSelector.select(selector)
   }
@@ -34,8 +34,6 @@ var DOM = (function(){
     }
   }
 })()
-
-
 
 var EventDispatcher = {
   on: function(selector, event, callback){
@@ -105,3 +103,4 @@ miniQuery.ajax = function(callDetails){
 }
 
 var $ = miniQuery
+
